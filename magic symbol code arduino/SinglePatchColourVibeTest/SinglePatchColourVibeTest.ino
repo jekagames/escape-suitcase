@@ -1,0 +1,132 @@
+#include <Adafruit_NeoPixel.h>
+
+#include <Adafruit_DRV2605.h>
+//NEOPIXELS INITIALIZATION
+// Which pin on the Arduino is connected to the NeoPixels?
+#define PIN        6 // On Trinket or Gemma, suggest changing this to 1
+int pin         =  6; 
+// How many NeoPixels are attached to the Arduino?
+#define NUMPIXELS 24 // Popular NeoPixel ring size
+int numPixels   = 24; // Popular NeoPixel ring size
+int pixelFormat = NEO_GRB + NEO_KHZ800;
+Adafruit_NeoPixel *pixels;
+#define DELAYVAL 300 // Time (in milliseconds) to pause between pixels
+
+//MOTOR VIBRATION CONTROLLER
+Adafruit_DRV2605 drv;
+
+void setup() {
+  // put your setup code here, to run once:
+pixels = new Adafruit_NeoPixel(numPixels, pin, pixelFormat);
+pixels->begin(); // INITIALIZE NeoPixel strip object (REQUIRED)
+pixels->setBrightness(100);
+
+  Serial.begin(9600);//open serial port to communicate with DRV
+  Serial.println("DRV test");
+  drv.begin(); //vibration control
+  
+  drv.selectLibrary(1);
+  drv.setMode(DRV2605_MODE_INTTRIG); 
+
+
+drv.setWaveform(0, 83);  // 
+drv.setWaveform(1, 119);  // 
+drv.setWaveform(2, 54);  // 
+drv.setWaveform(3, 119);  // 
+drv.setWaveform(4, 54);  // 
+drv.setWaveform(5, 71);  // 
+drv.setWaveform(6, 0);  // 
+}
+
+uint8_t effect = 0;
+
+void loop() {
+  // put your main code here, to run repeatedly:
+drv.go();
+  Serial.print("Effect # "); Serial.println(effect);
+   pixels->clear(); // Set all pixel colors to 'off'
+   for(int i=0; i<numPixels; i++)
+ pixels->setPixelColor(i, pixels->Color(0, 100, 100));
+  pixels->show();   // Send the updated pixel colors to the hardware.
+drv.go();
+colorWipeFade(pixels->Color(20, 130, 80) , 80);
+pixels->setBrightness(100);
+pixels->show();
+delay(300); // Pause before next pass through loop
+pulseBrightness();
+delay(500); // Pause before next pass through loop 
+drv.go();
+colorWipeFade(pixels->Color(0, 80, 150) , 80); 
+pulseBrightness();
+drv.go();
+colorWipeFade(pixels->Color(0, 150, 100) , 80);
+delay(200); 
+drv.go();
+pulseBrightness();
+drv.go();
+colorWipeFade(pixels->Color(0, 75, 75) , 100); 
+delay(300); 
+pixels->setBrightness(80);
+pixels->show();
+pulseBrightness();
+}
+
+void colorWipeFade(uint32_t color, int wait) {
+  for(int i=0; i<pixels->numPixels(); i++) { // For each pixel in strip...
+    pixels->setPixelColor(i, color);         //  Set pixel's color (in RAM)
+    pixels->show();                          //  Update strip to match
+    delay(wait);                           //  Pause for a moment
+  }
+}
+
+ void pulseBrightness()
+ {
+  pixels->setBrightness(75);
+pixels->show();
+delay(100); 
+pixels->setBrightness(65);
+pixels->show();
+delay(100); 
+pixels->setBrightness(60);
+pixels->show();
+delay(100); 
+pixels->setBrightness(55);
+pixels->show();
+delay(100); 
+pixels->setBrightness(50);
+pixels->show();
+delay(100); 
+pixels->setBrightness(40);
+pixels->show();
+delay(100); 
+pixels->setBrightness(30);
+pixels->show();
+delay(100); 
+pixels->setBrightness(5);
+pixels->show();
+delay(600); // Pause before next pass through loop  
+pixels->setBrightness(30);
+pixels->show();
+delay(100); 
+pixels->setBrightness(40);
+pixels->show();
+delay(100); 
+pixels->setBrightness(45);
+pixels->show();
+delay(100); 
+pixels->setBrightness(50);
+pixels->show();
+delay(100); 
+pixels->setBrightness(60);
+pixels->show();
+delay(100); 
+pixels->setBrightness(65);
+pixels->show();
+delay(100); 
+pixels->setBrightness(75);
+pixels->show();
+delay(100); 
+pixels->setBrightness(80);
+pixels->show();
+delay(500); // Pause before next pass through loop 
+ }
