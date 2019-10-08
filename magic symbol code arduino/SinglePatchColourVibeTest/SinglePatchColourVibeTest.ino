@@ -33,9 +33,10 @@ drv.setWaveform(0, 83);  //
 drv.setWaveform(1, 119);  // 
 drv.setWaveform(2, 54);  // 
 drv.setWaveform(3, 119);  // 
-drv.setWaveform(4, 54);  // 
+//drv.setWaveform(4, 54);  // 
 drv.setWaveform(5, 71);  // 
 drv.setWaveform(6, 0);  // 
+
 }
 
 uint8_t effect = 0;
@@ -47,26 +48,31 @@ drv.go();
    pixels->clear(); // Set all pixel colors to 'off'
    for(int i=0; i<numPixels; i++)
  pixels->setPixelColor(i, pixels->Color(0, 100, 100));
+ pixels->setBrightness(20);
   pixels->show();   // Send the updated pixel colors to the hardware.
 drv.go();
-colorWipeFade(pixels->Color(20, 130, 80) , 80);
-pixels->setBrightness(100);
+delay(600);
+colorWipeFade(pixels->Color(20, 130, 80) , 20);
+pixels->setBrightness(30);
 pixels->show();
 delay(300); // Pause before next pass through loop
 pulseBrightness();
 delay(500); // Pause before next pass through loop 
 drv.go();
-colorWipeFade(pixels->Color(0, 80, 150) , 80); 
+delay(600);
+colorWipeFade(pixels->Color(0, 80, 150) , 20); 
 pulseBrightness();
 drv.go();
-colorWipeFade(pixels->Color(0, 150, 100) , 80);
+colorWipeFade(pixels->Color(0, 150, 100) , 20);
 delay(200); 
 drv.go();
+delay(600);
 pulseBrightness();
 drv.go();
-colorWipeFade(pixels->Color(0, 75, 75) , 100); 
+delay(600);
+colorWipeFade(pixels->Color(0, 75, 75) , 20); 
 delay(300); 
-pixels->setBrightness(80);
+pixels->setBrightness(20);
 pixels->show();
 pulseBrightness();
 }
@@ -81,52 +87,44 @@ void colorWipeFade(uint32_t color, int wait) {
 
  void pulseBrightness()
  {
-  pixels->setBrightness(75);
+  pixels->setBrightness(30);
 pixels->show();
 delay(100); 
-pixels->setBrightness(65);
+pixels->setBrightness(25);
 pixels->show();
 delay(100); 
-pixels->setBrightness(60);
+pixels->setBrightness(20);
 pixels->show();
 delay(100); 
-pixels->setBrightness(55);
+pixels->setBrightness(15);
 pixels->show();
 delay(100); 
-pixels->setBrightness(50);
-pixels->show();
-delay(100); 
-pixels->setBrightness(40);
-pixels->show();
-delay(100); 
-pixels->setBrightness(30);
+pixels->setBrightness(10);
 pixels->show();
 delay(100); 
 pixels->setBrightness(5);
 pixels->show();
-delay(600); // Pause before next pass through loop  
+delay(100); 
+
+pixels->setBrightness(5);
+pixels->show();
+delay(1000); // Pause before next pass through loop  
+pixels->setBrightness(5);
+pixels->show();
+delay(100); 
+pixels->setBrightness(10);
+pixels->show();
+delay(100); 
+pixels->setBrightness(15);
+pixels->show();
+delay(100); 
+pixels->setBrightness(20);
+pixels->show();
+delay(100); 
+pixels->setBrightness(25);
+pixels->show();
+delay(100); 
 pixels->setBrightness(30);
-pixels->show();
-delay(100); 
-pixels->setBrightness(40);
-pixels->show();
-delay(100); 
-pixels->setBrightness(45);
-pixels->show();
-delay(100); 
-pixels->setBrightness(50);
-pixels->show();
-delay(100); 
-pixels->setBrightness(60);
-pixels->show();
-delay(100); 
-pixels->setBrightness(65);
-pixels->show();
-delay(100); 
-pixels->setBrightness(75);
-pixels->show();
-delay(100); 
-pixels->setBrightness(80);
 pixels->show();
 delay(500); // Pause before next pass through loop 
  }
