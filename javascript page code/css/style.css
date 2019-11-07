@@ -7,8 +7,13 @@ so the canvas is flush with the top left corner.
 **********************************************/
 
 body {
-  padding: 0;
-  margin: 0;
+  padding: 20px;
+  margin: 20px;
+  background-color: #E2A645;
+  font-family: 'Nanum Brush Script', cursive;
+	font-size: 26px;
+	color: #985407;
+
 }
 
 #not-secret-message {
@@ -17,4 +22,7 @@ body {
 
 #secret-message {
   display: none;
+  font-family: 'Nanum Brush Script', cursive;
+	font-size: 220px;
+	color: #985407;
 }
