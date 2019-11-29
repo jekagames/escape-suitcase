@@ -8,12 +8,16 @@ let konami = [87, 65, 83, 68, 70];
 // To begin with it's the first (0th) one
 let currentKey = 0;
 
-// We need to listen to keydown events on the page to detect when a key is pressed
-document.addEventListener('keydown', keyPressed);
+// We need to listen to keyup events on the page to detect when a key is pressed & released, because Makey Makey can trigger multiple keypresses together by accident
+document.addEventListener('keyup', keyUp);
 
+setTimeout(function(){
+   window.location.reload(1);
+}, 180000);
+//180000 = 3 minutes
 // This is the function called when a key is pressed
 // e contains information about that event
-function keyPressed(e) {
+function keyUp(e) {
   // Check if the keycode of the key pressed matches the one we're currently
   // waiting for in the konami code
   if (e.keyCode === konami[currentKey]) {
@@ -28,7 +32,7 @@ function keyPressed(e) {
       // And let's hide the non-secret message by setting its display style to none
       document.getElementById('not-secret-message').style.display = 'none';
       // And let's stop listening to the keyboard to avoid checking the code anymore
-      document.removeEventListener('keydown', keyPressed);
+      document.removeEventListener('keyup', keyUp);
     }
   }
   else {
