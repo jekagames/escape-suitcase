@@ -2,8 +2,8 @@
 // UP UP DOWN DOWN LEFT RIGHT LEFT RIGHT A B ENTER
 //let konami = [38, 38, 40, 40, 37, 39, 37, 39, 65, 66, 13];
 
-//W A S D F -- might need to be reordered to make it less obvious once things are wired up
-let konami = [87, 65, 83, 68, 70];
+//F W A D S
+let konami = [70, 87, 65, 68, 83];
 // Which key (in the array) are we waiting to see the user type next?
 // To begin with it's the first (0th) one
 let currentKey = 0;
