@@ -9,22 +9,22 @@ so the canvas is flush with the top left corner.
 body {
   background-color: #E2A645;
   font-family: 'Yeon Sung', cursive;
-	font-size: 120px;
+	font-size: 170px;
 	color: #3d3752;
-  background-image: url("../assets/images/background.jpg");
-	/*background-size: 100%;*/
 	background-attachment: fixed;
   background-repeat: no-repeat;
-	position: fixed;
-	width: 800px;
+	display:flex; 
+	justify-content: center
+	width: 1200px;
 	height: 600px;
 }
 
 #not-secret-message {
   padding: 40px;
-  margin: 20px;
+  margin:0 auto;
   display: block;
    text-align: center;
+
   opacity: 0.75;
 }
 
@@ -33,8 +33,8 @@ body {
 	opacity: 0.75;
 	padding: 40px;
 	 text-align: center;
-  margin: 40px;
+  margin:0 auto;
   font-family: 'Nanum Brush Script', cursive;
-	font-size: 340px;
+	font-size: 440px;
 	color: #3d3752;
 }
